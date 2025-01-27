@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package filemanager;
+
+service FileManager {
+  rpc UploadFile(UploadFileRequest) returns (UploadFileResponse);
+  rpc ListFiles(ListFilesRequest) returns (ListFilesResponse);
+  rpc DownloadFile(DownloadFileRequest) returns (DownloadFileResponse);
+}
+
+message UploadFileRequest {
+  string filename = 1;
+  bytes content = 2;
+}
+
+message UploadFileResponse {
+  string message = 1;
+}
+
+message ListFilesRequest {}
+
+message ListFilesResponse {
+  repeated FileMetadata files = 1;
+}
+
+message FileMetadata {
+  string name = 1;
+  string created_at = 2;
+  string updated_at = 3;
+}
+
+message DownloadFileRequest {
+  string filename = 1;
+}
+
+message DownloadFileResponse {
+  bytes content = 1;
+}
